@@ -1,0 +1,48 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+
+    "version": "2.0.0",
+    "tasks": [
+        /* TASK 01 - COMPILA O ARQUIVO C/C++ */
+        {
+            "label": "build C/C++ file",
+            "type": "shell",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${cwd}/build/${fileBasenameNoExtension}.run"
+            ],
+            "group": "build",
+        },
+
+        /* TASK 02 - EXECUTA O ARQUIVO C/C++ */
+        {
+            "label": "build and run C/C++ file",
+            "type": "shell",
+            "command": "${cwd}/build/${fileBasenameNoExtension}.run",
+            "group": "build",
+            "dependsOn":[
+                "build C/C++ file"
+            ]
+        },
+    ]
+}
+
+/*
+
+${cwd}                          raiz do projeto                     // /home/bleszerd/repository/cbook
+${fileBasenameNoExtension}      nome do arquivo sem extenção        // mediaExample
+${fileBasename}                 nome do arquivo com extenção        // mediaExample.c
+${fileDirname}                  nome do diretório                   // /home/bleszerd/repository/cbook/src/mediaExample
+${fileExtname}                  extenção do arquivo                 // .c
+${file}                         arquivo com extenção                // /home/bleszerd/repository/cbook/src/mediaExample/mediaExample.c
+${workspaceFolder}              raiz do projeto                     // /home/bleszerd/repository/cbook
+${workspaceFolderBasename}      somente nome da raiz do projeto     // /cbook
+${relativeFileDirname}          diretório a partir da raiz          // src/mediaExample
+${relativeFile}                 arquivo a partir da raiz            // src/mediaExample/mediaExample.c
+${workspaceFolderBasename}      somente nome da raiz do projeto     // /cbook
+
+*/
